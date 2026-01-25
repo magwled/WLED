@@ -1,0 +1,4 @@
+{
+  "name": "VL53L4CD_gestures",
+  "build": { "libArchive": false }
+}
