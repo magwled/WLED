@@ -1,0 +1,7 @@
+{
+  "name": "modulino_knob",
+  "build": {
+    "libArchive": false,
+    "extraScript": "setup_deps.py"
+  }
+}
