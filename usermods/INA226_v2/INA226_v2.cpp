@@ -181,11 +181,14 @@ private:
         if (_lastStatus != 0)
             return;
 
+        // Must refresh flags from the chip; overflow is not updated by getCurrent etc.
+        _ina226->readAndClearFlags();
+        bool overflow = _ina226->overflow;
+
         float current = truncateDecimals((_ina226->getCurrent_mA() - _currentOffsetMa) / 1000.0f);
         float voltage = truncateDecimals(_ina226->getBusVoltage_V());
         float power = truncateDecimals(_ina226->getBusPower() / 1000.0f);
         float shuntVoltage = truncateDecimals(_ina226->getShuntVoltage_mV());
-        bool overflow = _ina226->overflow;
 
 #ifndef WLED_DISABLE_MQTT
         mqttPublishIfChanged(F("current"), _lastCurrentSent, current, 0.01f);
